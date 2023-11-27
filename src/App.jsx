@@ -35,7 +35,6 @@ function App() {
       // Now using the last index we founded from orginal array which is findLast... --Position to add element at--
       // 0 which tell it that we dont want to remove anything
       // Finally adding the element we want to add which is findcurrent
-      console.log(findLastIndexWithFalse);
       UpdatedArr.splice(
         findLastIndexWithFalse === -1 ? 0 : findLastIndexWithFalse + 1,
         0,
