@@ -6,12 +6,16 @@ import { nanoid } from "nanoid";
 function Header({ todo, setTodo }) {
   const [textValue, setTextValue] = useState("");
   function addtodo() {
-    setTodo((prev) => {
-      return [
-        { id: nanoid(), text: textValue, completed: false, edit: false },
-        ...prev,
-      ];
-    });
+    if (textValue !== "") {
+      setTodo((prev) => {
+        return [
+          { id: nanoid(), text: textValue, completed: false, edit: false },
+          ...prev,
+        ];
+      });
+    } else {
+      return alert("PLEASE FILL THE INPUT FIELD");
+    }
   }
   return (
     <header className="h-40 bg-darkColor-400 flex flex-col items-center justify-center relative mb-16">

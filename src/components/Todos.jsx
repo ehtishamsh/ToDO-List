@@ -16,13 +16,15 @@ function Todos({
       <div
         key={index}
         onClick={() => setCurrentId(todo.id)}
-        className={`flex ${
-          todo.completed && "pointer-events-none"
-        } justify-between items-center w-full gap-4 bg-darkColor-100 p-4 text-slate-200 border-solid ${
+        className={`flex justify-between items-center w-full gap-4 bg-darkColor-100 p-4 text-slate-200 border-solid ${
           todo.completed ? " border-darkColor-100" : " border-darkColor-75"
         } border rounded-lg`}
       >
-        <div className="flex items-center">
+        <div
+          className={`flex items-center  ${
+            todo.completed && "pointer-events-none"
+          } `}
+        >
           <input
             type="checkbox"
             id="checkbox"
@@ -46,25 +48,27 @@ function Todos({
             )}
           </label>
         </div>
-        <div className="w-5/6 flex item-center">
+        <div className="w-full flex item-center">
           <input
             type="text"
             className={`transition-all duration-500 text-sm border-none active:outline-0 focus:outline-0 w-full ${
               todo.edit
                 ? "bg-darkColor-75 rounded-lg p-2 "
                 : "bg-inherit p-0 m-0"
-            } ${todo.completed && "line-through"}`}
+            } ${todo.completed && "line-through pointer-events-none"}`}
             onChange={(e) => updateText(e)}
             disabled={todo.edit ? false : true}
             value={todo.text}
           />
         </div>
         <div className="flex justify-center items-center gap-2">
-          <FontAwesomeIcon
-            icon={faPenToSquare}
-            className="text-sm text-darkColor-50 cursor-pointer hover:text-gray-400 hover:transform hover:scale-150 transition-all duration-500"
-            onClick={(e) => handleEdit(e, todo.id)}
-          />
+          {todo.completed === false && (
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              className="text-sm text-darkColor-50 cursor-pointer hover:text-gray-400 hover:transform hover:scale-150 transition-all duration-500"
+              onClick={(e) => handleEdit(e, todo.id)}
+            />
+          )}
           <FontAwesomeIcon
             icon={faTrashCan}
             className="text-sm text-darkColor-50 cursor-pointer hover:text-gray-400 hover:transform hover:scale-150 transition-all duration-500"
