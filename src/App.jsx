@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 function App() {
   const [todo, setTodo] = useState([]);
+  const [theme, setTheme] = useState(false);
   const [currentElementId, SetCurrentElementId] = useState("");
   function handleChange() {
     setTodo((prev) => {
@@ -70,10 +71,29 @@ function App() {
       });
     });
   }
+  function changeStateTheme() {
+    setTheme((prev) => !prev);
+  }
+  useEffect(() => {
+    function themeToggle() {
+      let htmlDoc = document.querySelector("html");
+      htmlDoc.classList.remove("dark");
+      htmlDoc.classList.remove("light");
+      theme === true
+        ? htmlDoc.classList.add("dark")
+        : htmlDoc.classList.add("light");
+    }
+    themeToggle();
+  }, [theme]);
   return (
-    <div className="bg-darkColor-300 h-screen w-screen">
-      <Header todo={todo} setTodo={setTodo} />
-      <div className="flex justify-center items -center">
+    <div className="dark:bg-darkColor-300 bg-gray-200 h-screen w-screen overflow-x-hidden pb-6">
+      <Header
+        todo={todo}
+        setTodo={setTodo}
+        theme={theme}
+        handleTheme={changeStateTheme}
+      />
+      <div className="flex justify-center items-center">
         <Todos
           todos={todo}
           setCurrentId={SetCurrentElementId}

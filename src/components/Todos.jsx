@@ -16,8 +16,10 @@ function Todos({
       <div
         key={index}
         onClick={() => setCurrentId(todo.id)}
-        className={`flex justify-between items-center w-full gap-4 bg-darkColor-100 p-4 text-slate-200 border-solid ${
-          todo.completed ? " border-darkColor-100" : " border-darkColor-75"
+        className={`flex justify-between items-center w-full gap-4 dark:bg-darkColor-100 bg-gray-100 p-4 dark:text-slate-200 text-darkColor-75 border-solid ${
+          todo.completed
+            ? " dark:border-darkColor-100 border-gray-300"
+            : " dark:border-darkColor-75 border-gray-300"
         } border rounded-lg`}
       >
         <div
@@ -53,7 +55,7 @@ function Todos({
             type="text"
             className={`transition-all duration-500 text-sm border-none active:outline-0 focus:outline-0 w-full ${
               todo.edit
-                ? "bg-darkColor-75 rounded-lg p-2 "
+                ? "dark:bg-darkColor-75 bg-blue-100 rounded-lg p-2 "
                 : "bg-inherit p-0 m-0"
             } ${todo.completed && "line-through pointer-events-none"}`}
             onChange={(e) => updateText(e)}
@@ -80,7 +82,7 @@ function Todos({
   });
 
   return (
-    <div className="w-[700px]">
+    <div className="w-[700px] max-sm:w-[411px] max-md:w-[611px] ">
       <div className="flex justify-between items-center">
         <h3 className="text-sm text-indigo-400 font-bold">
           Tasks Created
@@ -100,12 +102,12 @@ function Todos({
           todoElement
         ) : (
           <>
-            <hr className="w-full border-solid border border-darkColor-100 mb-16" />
+            <hr className="w-full border-solid border dark:border-darkColor-100 border-gray-300 mb-16" />
             <img src="/EmptyList.png" alt="" className="w-16 mb-4" />
-            <p className="text-darkColor-50 font-bold text-base">
+            <p className="dark:text-darkColor-50 text-darkColor-75 font-bold text-base">
               You haven't added any tasks yet
             </p>
-            <p className="text-darkColor-50 text-base">
+            <p className="dark:text-darkColor-50 text-darkColor-75 text-base">
               Create tasks and organize your to-do items
             </p>
           </>

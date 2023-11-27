@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSquareCheck,
+  faLightbulb,
+} from "@fortawesome/free-regular-svg-icons";
+import { faCircleCheck, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "nanoid";
-function Header({ todo, setTodo }) {
+function Header({ todo, setTodo, theme, handleTheme }) {
   const [textValue, setTextValue] = useState("");
   function addtodo() {
     if (textValue !== "") {
@@ -18,7 +21,32 @@ function Header({ todo, setTodo }) {
     }
   }
   return (
-    <header className="h-40 bg-darkColor-400 flex flex-col items-center justify-center relative mb-16">
+    <header className="h-40 dark:bg-darkColor-400  bg-slate-50 flex flex-col items-center justify-center relative mb-16">
+      <label
+        htmlFor="modeToggle"
+        className="flex items-center cursor-pointer absolute top-8 right-16 mr-2"
+      >
+        <div
+          onClick={handleTheme}
+          className={`w-10 h-5  bg-darkColor-100 dark:bg-gray-200 rounded-full shadow-inner transition-all duration-500 flex items-center ${
+            theme ? "justify-end" : "justify-start"
+          }`}
+        >
+          <div className="w-[18px] h-[18px] mx-[1px]  dark:bg-slate-900 bg-slate-200 rounded-full flex justify-center items-center ">
+            {theme ? (
+              <FontAwesomeIcon
+                icon={faLightbulb}
+                className="text-slate-200 text-sm"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faMoon}
+                className="text-slate-800 text-sm"
+              />
+            )}
+          </div>
+        </div>
+      </label>
       <nav className="flex justify-center items-center gap-2">
         <FontAwesomeIcon
           icon={faSquareCheck}
@@ -34,7 +62,7 @@ function Header({ todo, setTodo }) {
           value={textValue}
           onChange={(e) => setTextValue(e.target.value)}
           placeholder="Create a Task"
-          className="w-[620px] p-3 rounded-lg bg-darkColor-200 border-darkColor-400 border-2 border-solid outline-none text-slate-200"
+          className="w-[620px] max-sm:w-[330px] max-md:w-[530px] p-3 rounded-lg dark:bg-darkColor-200 dark:border-darkColor-400 dark:border-2 dark:border-solid outline-none shadow-[0px_0px_23px_0px_#00000024]  bg-gray-100 dark:text-slate-200"
         />
         <button
           onClick={addtodo}
