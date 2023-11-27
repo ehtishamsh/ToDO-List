@@ -18,7 +18,7 @@ function App() {
         (item) => item.id === currentElementId
       );
       // finding the last element that has completed as false
-      // Remeber you have to slice the array to reverse it mean make shallow copy
+      // NOTE FOR ME:______ you have to slice the array to reverse it mean make shallow copy________
       const findLastElementWithFalse = UpdatedArr.slice()
         .reverse()
         .find((item) => item.completed === false);
@@ -35,15 +35,42 @@ function App() {
       // Now using the last index we founded from orginal array which is findLast... --Position to add element at--
       // 0 which tell it that we dont want to remove anything
       // Finally adding the element we want to add which is findcurrent
+      console.log(findLastIndexWithFalse);
       UpdatedArr.splice(
-        findLastIndexWithFalse === -1 ? 0 : findLastIndexWithFalse,
+        findLastIndexWithFalse === -1 ? 0 : findLastIndexWithFalse + 1,
         0,
         findCurrent
       );
       return [...UpdatedArr];
     });
   }
-
+  function deleteTodo(e, id) {
+    e.stopPropagation();
+    setTodo((prev) => {
+      return prev.filter((item) => item.id !== id);
+    });
+  }
+  function updateText(e) {
+    setTodo((prev) => {
+      return prev.map((item) => {
+        if (item.id === currentElementId) {
+          return { ...item, text: e.target.value };
+        }
+        return { ...item };
+      });
+    });
+  }
+  function handleEdit(e, id) {
+    e.stopPropagation();
+    setTodo((prev) => {
+      return prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, edit: !item.edit };
+        }
+        return { ...item };
+      });
+    });
+  }
   return (
     <div className="bg-darkColor-300 h-screen w-screen">
       <Header todo={todo} setTodo={setTodo} />
@@ -52,6 +79,9 @@ function App() {
           todos={todo}
           setCurrentId={SetCurrentElementId}
           handleChange={handleChange}
+          deleteTodo={deleteTodo}
+          updateText={updateText}
+          handleEdit={handleEdit}
         />
       </div>
     </div>

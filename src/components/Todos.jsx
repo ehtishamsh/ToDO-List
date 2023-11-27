@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
 
-function Todos({ todos, setCurrentId, handleChange }) {
+function Todos({
+  todos,
+  setCurrentId,
+  handleChange,
+  deleteTodo,
+  updateText,
+  handleEdit,
+}) {
   const checkCompelted = todos.filter((item) => item.completed === true);
   const todoElement = todos.map((todo, index) => {
     return (
@@ -40,13 +46,31 @@ function Todos({ todos, setCurrentId, handleChange }) {
             )}
           </label>
         </div>
-        <p className={`text-sm ${todo.completed && "line-through"}`}>
-          {todo.text}
-        </p>
-        <FontAwesomeIcon
-          icon={faTrashCan}
-          className="text-sm text-darkColor-50"
-        />
+        <div className="w-5/6 flex item-center">
+          <input
+            type="text"
+            className={`transition-all duration-500 text-sm border-none active:outline-0 focus:outline-0 w-full ${
+              todo.edit
+                ? "bg-darkColor-75 rounded-lg p-2 "
+                : "bg-inherit p-0 m-0"
+            } ${todo.completed && "line-through"}`}
+            onChange={(e) => updateText(e)}
+            disabled={todo.edit ? false : true}
+            value={todo.text}
+          />
+        </div>
+        <div className="flex justify-center items-center gap-2">
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            className="text-sm text-darkColor-50 cursor-pointer hover:text-gray-400 hover:transform hover:scale-150 transition-all duration-500"
+            onClick={(e) => handleEdit(e, todo.id)}
+          />
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            className="text-sm text-darkColor-50 cursor-pointer hover:text-gray-400 hover:transform hover:scale-150 transition-all duration-500"
+            onClick={(e) => deleteTodo(e, todo.id)}
+          />
+        </div>
       </div>
     );
   });

@@ -7,7 +7,10 @@ function Header({ todo, setTodo }) {
   const [textValue, setTextValue] = useState("");
   function addtodo() {
     setTodo((prev) => {
-      return [{ id: nanoid(), text: textValue, completed: false }, ...prev];
+      return [
+        { id: nanoid(), text: textValue, completed: false, edit: false },
+        ...prev,
+      ];
     });
   }
   return (
