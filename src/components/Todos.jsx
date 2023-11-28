@@ -82,7 +82,7 @@ function Todos({
   });
 
   return (
-    <div className="w-[700px] max-sm:w-[411px] max-md:w-[611px] ">
+    <div className="w-[700px] max-sm:w-[411px] max-md:w-[611px] max-xxs:w-[361px] max-xxxs:w-[321px] ">
       <div className="flex justify-between items-center">
         <h3 className="text-sm text-indigo-400 font-bold">
           Tasks Created

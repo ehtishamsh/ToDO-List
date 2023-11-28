@@ -63,7 +63,7 @@ function Header({ todo, setTodo, theme, handleTheme }) {
           value={textValue}
           onChange={(e) => setTextValue(e.target.value)}
           placeholder="Create a Task"
-          className="w-[620px] max-sm:w-[330px] max-md:w-[530px] p-3 rounded-lg dark:bg-darkColor-200 dark:border-darkColor-400 dark:border-2 dark:border-solid outline-none shadow-[0px_0px_23px_0px_#00000024]  bg-gray-100 dark:text-slate-200"
+          className="w-[620px] max-sm:w-[330px] max-md:w-[530px] max-xxs:w-[280px]  max-xxxs:w-[240px] p-3 rounded-lg dark:bg-darkColor-200 dark:border-darkColor-400 dark:border-2 dark:border-solid outline-none shadow-[0px_0px_23px_0px_#00000024]  bg-gray-100 dark:text-slate-200"
         />
         <button
           onClick={addtodo}
