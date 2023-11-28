@@ -16,6 +16,7 @@ function Header({ todo, setTodo, theme, handleTheme }) {
           ...prev,
         ];
       });
+      setTextValue("");
     } else {
       return alert("PLEASE FILL THE INPUT FIELD");
     }
