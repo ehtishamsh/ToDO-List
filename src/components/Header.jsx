@@ -59,6 +59,7 @@ function Header({ todo, setTodo, theme, handleTheme }) {
       <div className="flex justify-center items-center gap-2 translate-y-20 absolute">
         <input
           type="text"
+          id="addtext"
           value={textValue}
           onChange={(e) => setTextValue(e.target.value)}
           placeholder="Create a Task"

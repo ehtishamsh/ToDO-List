@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 function App() {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(
+    JSON.parse(localStorage.getItem("todo")) || []
+  );
   const [theme, setTheme] = useState(false);
   const [currentElementId, SetCurrentElementId] = useState("");
   function handleChange() {
@@ -85,6 +87,11 @@ function App() {
     }
     themeToggle();
   }, [theme]);
+
+  useEffect(() => {
+    const stringFy = JSON.stringify(todo);
+    const store = localStorage.setItem("todo", stringFy);
+  }, [todo]);
   return (
     <div className="dark:bg-darkColor-300 bg-gray-200 h-screen w-screen overflow-x-hidden pb-6">
       <Header
